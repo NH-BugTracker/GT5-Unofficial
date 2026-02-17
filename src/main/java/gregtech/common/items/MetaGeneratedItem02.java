@@ -2399,6 +2399,7 @@ public class MetaGeneratedItem02 extends MetaGeneratedItemX32 {
                 new TCAspects.TC_AspectStack(TCAspects.LUCRUM, 1L)));
         ItemList.Item_Redstone_Sniffer
             .set(new ItemRedstoneSniffer("Item_Redstone_Sniffer", "Redstone Sniffer", "What are these frequencies?!"));
+        ItemList.Item_Phone.set(new ItemPhone("Item_Phone", "GregPhone 12", "A serious phone for serious business."));
         ItemList.DroneRemoteInterface.set(
             new ItemDroneRemoteInterface(
                 "Item_Drone_Remote_Interface",
