@@ -101,6 +101,8 @@ import gregtech.common.powergoggles.handlers.PowerGogglesConfigHandler;
 import gregtech.crossmod.ae2.AE2Compat;
 import gregtech.crossmod.holoinventory.HoloInventory;
 import gregtech.crossmod.waila.Waila;
+import gregtech.gtnhteams.CashTeamData;
+import gregtech.gtnhteams.TeamDataRegistry;
 import gregtech.loaders.load.FissionFuelLoader;
 import gregtech.loaders.load.FuelLoader;
 import gregtech.loaders.load.GTItemIterator;
@@ -386,6 +388,8 @@ public class GTMod {
         GTStructureChannels.register();
 
         LHECoolantRegistry.registerBaseCoolants();
+
+        TeamDataRegistry.register("cashteam", CashTeamData::new);
 
         GT_FML_LOGGER.debug("Registering SpaceDimensions");
         SpaceDimRegisterer.register();

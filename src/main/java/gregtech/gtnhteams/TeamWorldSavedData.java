@@ -26,6 +26,7 @@ public class TeamWorldSavedData extends WorldSavedData {
     private static final String DATA_NAME = "GTNHLib_TeamWorldSavedData";
 
     private static void loadInstance(World world) {
+        TeamManager.clear();
         MapStorage storage = world.mapStorage;
         INSTANCE = (TeamWorldSavedData) storage.loadData(TeamWorldSavedData.class, DATA_NAME);
         if (INSTANCE == null) {
@@ -46,6 +47,13 @@ public class TeamWorldSavedData extends WorldSavedData {
     public static void onWorldLoad(WorldEvent.Load event) {
         if (!event.world.isRemote && event.world.provider.dimensionId == 0) {
             loadInstance(event.world);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onWorldUnload(WorldEvent.Unload event) {
+        if (!event.world.isRemote && event.world.provider.dimensionId == 0) {
+            TeamManager.clear();
         }
     }
 
@@ -84,7 +92,7 @@ public class TeamWorldSavedData extends WorldSavedData {
             // Officers
             NBTTagList officersList = teamTag.getTagList("Officers", Constants.NBT.TAG_STRING);
             for (int j = 0; j < officersList.tagCount(); j++) {
-                team.addOfficer(UUID.fromString(ownersList.getStringTagAt(j)));
+                team.addOfficer(UUID.fromString(officersList.getStringTagAt(j)));
             }
 
             // Members
@@ -128,7 +136,7 @@ public class TeamWorldSavedData extends WorldSavedData {
             for (UUID officer : team.getOfficers()) {
                 officersList.appendTag(new NBTTagString(officer.toString()));
             }
-            teamTag.setTag("Officers", ownersList);
+            teamTag.setTag("Officers", officersList);
 
             // Members
             NBTTagList membersList = new NBTTagList();
@@ -145,6 +153,7 @@ public class TeamWorldSavedData extends WorldSavedData {
                     .writeToNBT(entryTag);
                 dataTag.setTag(entry.getKey(), entryTag);
             }
+            teamTag.setTag("TeamData", dataTag);
 
             teamList.appendTag(teamTag);
         }
