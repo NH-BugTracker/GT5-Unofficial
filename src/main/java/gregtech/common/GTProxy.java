@@ -171,6 +171,8 @@ import gregtech.common.powergoggles.handlers.PowerGogglesEventHandler;
 import gregtech.common.recipes.CALImprintRecipe;
 import gregtech.common.tileentities.machines.multi.drone.MTEDroneCentre;
 import gregtech.common.worldgen.HEEIslandScanner;
+import gregtech.gtnhteams.TeamAdminCommand;
+import gregtech.gtnhteams.TeamCommand;
 import gregtech.nei.GTNEIDefaultHandler;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -1199,6 +1201,9 @@ public class GTProxy implements IFuelHandler {
         MinecraftForge.EVENT_BUS.register(powerfailTracker);
         FMLCommonHandler.instance().bus().register(tetherManager);
         MinecraftForge.EVENT_BUS.register(tetherManager);
+
+        TeamCommand.register();
+        TeamAdminCommand.register();
         // spotless:off
     }
 
